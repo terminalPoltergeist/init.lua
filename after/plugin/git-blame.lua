@@ -1,0 +1,8 @@
+vim.cmd('let g:gitblame_date_format = "%a %y/%m/%d @ %H:%M"')
+vim.cmd('let g:gitblame_message_template = "    <author> - <summary> - <date>"')
+vim.cmd('let g:gitblame_message_when_not_committed = "    ~~~"')
+vim.cmd('let g:gitblame_highlight_group = "CursorLine"')
+vim.cmd('let g:gitblame_delay = 500')
+vim.cmd('let g:gitblame_use_blame_commit_file_urls = "true"')
+vim.cmd(':GitBlameDisable')
+vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>")

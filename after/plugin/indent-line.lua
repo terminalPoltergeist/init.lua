@@ -1,0 +1,3 @@
+-- local colors = require('terminalPoltergeist.colors')
+-- vim.cmd('let g:indentLine_char = "·"') -- set indent indicator to ·
+-- vim.cmd('let g:indentLine_defaultGroup = "SpecialKey"')
