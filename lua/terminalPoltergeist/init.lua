@@ -1,11 +1,12 @@
 require("terminalPoltergeist.remaps")
 require("terminalPoltergeist.packer")
+require("terminalPoltergeist.colors")
 
 local cmd = vim.cmd
 local o = vim.o
 local api = vim.api
 
--- cmd("source ~/.config/nvim/lua/terminalPoltergeist/functions.vim")
+cmd("source ~/.config/nvim/lua/terminalPoltergeist/functions.vim")
 
 -- o.guicursor = ""
 o.expandtab = true
@@ -35,8 +36,8 @@ o.foldminlines = 4
 -- vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3.12'
 -- vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
 
-api.nvim_create_autocmd('VimEnter',
-    { pattern = { "*.md", "*.mdx", "*.json*" }, command = ":set concealcursor= | :set conceallevel=2 | :source /Users/jacknemitz/dotfiles/roles/nvim/files/after/syntax/markdown.vim" })
+-- api.nvim_create_autocmd('VimEnter',
+--     { pattern = { "*.md", "*.mdx", "*.json*" }, command = ":set concealcursor= | :set conceallevel=2 | :source /Users/jack/.config/nvim/after/syntax/markdown.vim" })
 -- api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ./"})
 api.nvim_create_autocmd('QuitPre', { pattern = { "*.md", "*.mdx" }, command = ":qa | set colorcolumn=80" }) -- quit vim when closing goyo
 api.nvim_create_autocmd('VimEnter',
@@ -53,7 +54,6 @@ api.nvim_create_autocmd('VimEnter', { command = ":if argc() == 0 | Explore! | en
 api.nvim_create_autocmd('VimEnter', { pattern = { "*.tf" }, command = ":setlocal commentstring=#\\ %s | setlocal ft=terraform" })
 api.nvim_create_autocmd('BufRead',
     { pattern = { "inventory.yml", "hosts.yml, homelab/**/*.yml" }, command = ":set filetype=yaml.ansible" })
-
 api.nvim_create_autocmd('LspAttach', {
     callback = function (e)
         local opts = { buffer = e.buf }
