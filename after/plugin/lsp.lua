@@ -170,7 +170,7 @@ require("lspconfig").eslint.setup({
 
 require("lspconfig").powershell_es.setup{
   capabilities = capabilities,
-  bundle_path = '/usr/local/bin/PowerShellEditorServices',
+  bundle_path = '~/.local/share/powershell/PowerShellEditorServices',
   shell = '/usr/local/bin/pwsh'
 }
 
@@ -187,12 +187,33 @@ require("lspconfig").jsonls.setup {
 require("lspconfig").marksman.setup({})
 require("lspconfig").phpactor.setup({})
 
+-- require('lspconfig.configs').pbls = {
+--     default_config = {
+--         cmd = { '/Users/jack/.cargo/bin/pbls' },
+--         filetypes = { 'proto' }
+--     }
+-- }
+
+-- require('lspconfig').pbls.setup({})
+
 require("lspconfig.configs").protobuf_language_server = {
     default_config = {
-        cmd = { '/Users/jacknemitz/go/bin/protobuf-language-server' },
-        filetypes = { 'proto', 'cpp' },
+        cmd = { '/Users/jack/go/bin/protobuf-language-server' },
+        filetypes = { 'proto' },
         root_dir = require('lspconfig.util').root_pattern('.git'),
-        single_file_support = true,
+        -- single_file_support = true,
     }
 }
--- require("lspconfig").protobuf_language_server.setup({})
+
+require('lspconfig').protobuf_language_server.setup({})
+
+-- require('lspconfig.configs').buf_lsp = {
+--     default_config = {
+--         cmd = { 'buf', 'beta', 'lsp' },
+--         filetypes = { 'proto' },
+--         root_dir = function(fname)
+--             return lsp.util.find_git_ancestor(fname)
+--         end,
+--         settings = {},
+--     }
+-- }
