@@ -198,7 +198,7 @@ require("lspconfig").phpactor.setup({})
 
 require("lspconfig.configs").protobuf_language_server = {
     default_config = {
-        cmd = { '/Users/jack/go/bin/protobuf-language-server' },
+        cmd = { '/Users/jack/go/bin/protobuf-language-server', '-logs', '/Users/jack/.local/state/nvim/.protobuf-language-server.log' },
         filetypes = { 'proto' },
         root_dir = require('lspconfig.util').root_pattern('.git'),
         -- single_file_support = true,
