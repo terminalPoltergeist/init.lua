@@ -3,10 +3,13 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lsp = require("lspconfig")
 
+vim.diagnostic.config({
+  virtual_text = true
+})
+
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- Mappings to magical LSP functions!
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -90,11 +93,21 @@ require("lspconfig").terraformls.setup({
 
 require("lspconfig").ansiblels.setup({
   capabilities = capabilities,
+  root_dir = require('lspconfig.util').root_pattern('.git'),
+  settings = {
+      ansible = {
+          validation = {
+              lint = {
+                  enabled = false,
+              }
+          }
+      }
+  }
 })
 
 require("lspconfig").html.setup({
-  capabilities = capabilities,
-    filetypes = { "html", "templ" },
+    capabilities = capabilities,
+    filetypes = { "html", "templ", "blade" },
 })
 
 require("lspconfig").htmx.setup({
@@ -108,7 +121,7 @@ require("lspconfig").cssls.setup({
 
 require("lspconfig").tailwindcss.setup({
     capabilities = capabilities,
-    filetypes = { "html", "templ", "css" },
+    filetypes = { "html", "templ", "css", "blade" },
     init_options = { userLanguages = { templ = "html" } }
 })
 
@@ -185,7 +198,25 @@ require("lspconfig").jsonls.setup {
 }
 
 require("lspconfig").marksman.setup({})
-require("lspconfig").phpactor.setup({})
+-- require("lspconfig").phpactor.setup({})
+require('lspconfig').intelephense.setup({
+    filetypes = { "php" },
+  commands = {
+    IntelephenseIndex = {
+      function()
+        vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
+      end,
+    },
+  },
+  on_attach = function(client, bufnr)
+    -- client.server_capabilities.documentFormattingProvider = false
+    -- client.server_capabilities.documentRangeFormattingProvider = false
+    -- if client.server_capabilities.inlayHintProvider then
+    --   vim.lsp.buf.inlay_hint(bufnr, true)
+    -- end
+  end,
+  capabilities = capabilities
+})
 
 -- require('lspconfig.configs').pbls = {
 --     default_config = {
@@ -206,6 +237,18 @@ require("lspconfig.configs").protobuf_language_server = {
 }
 
 require('lspconfig').protobuf_language_server.setup({})
+
+require("lspconfig.configs").sqlls = {
+    default_config = {
+        cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
+        filetypes = { 'sql' },
+        root_dir = require('lspconfig.util').root_pattern('.git'),
+    }
+}
+
+require('lspconfig').sqlls.setup({})
+
+require('lspconfig').yamlls.setup({})
 
 -- require('lspconfig.configs').buf_lsp = {
 --     default_config = {

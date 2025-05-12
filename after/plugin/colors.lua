@@ -175,6 +175,11 @@ vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultError', { fg = colors.gui08 })
 vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultWarning', { fg = colors.gui09 })
 vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHnformation', { fg = colors.gui05 })
 vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHint', { fg = colors.gui03 })
+vim.api.nvim_set_hl(0, 'DiagnosticOk', { fg = colors.gui0B })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = colors.gui0C })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = colors.gui0D })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = colors.gui09 })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.gui08 })
 
 -- Mail highlighting
 vim.api.nvim_set_hl(0, 'mailQuoted1', { fg = colors.gui0A })
