@@ -17,11 +17,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gk', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 -- vim.opt.signcolumn = 'no'
@@ -198,24 +198,24 @@ require("lspconfig").jsonls.setup {
 }
 
 require("lspconfig").marksman.setup({})
--- require("lspconfig").phpactor.setup({})
+require("lspconfig").phpactor.setup({})
 require('lspconfig').intelephense.setup({
     filetypes = { "php" },
-  commands = {
-    IntelephenseIndex = {
-      function()
-        vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
-      end,
+    commands = {
+        IntelephenseIndex = {
+            function()
+                vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
+            end,
+        },
     },
-  },
-  on_attach = function(client, bufnr)
-    -- client.server_capabilities.documentFormattingProvider = false
-    -- client.server_capabilities.documentRangeFormattingProvider = false
-    -- if client.server_capabilities.inlayHintProvider then
-    --   vim.lsp.buf.inlay_hint(bufnr, true)
-    -- end
-  end,
-  capabilities = capabilities
+    on_attach = function(client, bufnr)
+        -- client.server_capabilities.documentFormattingProvider = false
+        -- client.server_capabilities.documentRangeFormattingProvider = false
+        -- if client.server_capabilities.inlayHintProvider then
+        --   vim.lsp.buf.inlay_hint(bufnr, true)
+        -- end
+    end,
+    capabilities = capabilities
 })
 
 -- require('lspconfig.configs').pbls = {
@@ -245,10 +245,18 @@ require("lspconfig.configs").sqlls = {
         root_dir = require('lspconfig.util').root_pattern('.git'),
     }
 }
-
 require('lspconfig').sqlls.setup({})
 
 require('lspconfig').yamlls.setup({})
+
+-- require('lspconfig.configs').alpinejsls = {
+--     default_config = {
+--         cmd = { 'alpinejs-language-server', '--stdio' },
+--         filetypes = { 'blade', 'html' },
+--         root_dir = require('lspconfig.util').root_pattern('.git'),
+--     }
+-- }
+-- require('lspconfig').alpinejsls.setup({})
 
 -- require('lspconfig.configs').buf_lsp = {
 --     default_config = {
