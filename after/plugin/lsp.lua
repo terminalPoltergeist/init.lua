@@ -4,74 +4,74 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp = require("lspconfig")
 
 vim.diagnostic.config({
-  virtual_text = true
+    virtual_text = true
 })
 
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  -- Mappings to magical LSP functions!
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gk', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Mappings to magical LSP functions!
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gk', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 -- vim.opt.signcolumn = 'no'
 
 local lspconfig_defaults = lsp.util.default_config
 lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-  'force',
-  lspconfig_defaults.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
+    'force',
+    lspconfig_defaults.capabilities,
+    require('cmp_nvim_lsp').default_capabilities()
 )
 
 require("lspconfig").lua_ls.setup({
-  capabilities = capabilities,
-  -- on_attach = custom_attach,
-  settings = {
-    Lua = {
-    runtime = {
-      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-      version = "LuaJIT",
-      -- Setup your lua path
-      -- path = ,
+    capabilities = capabilities,
+    -- on_attach = custom_attach,
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+                -- Setup your lua path
+                -- path = ,
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                -- library = api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
     },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = { "vim" },
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      -- library = api.nvim_get_runtime_file("", true),
-    },
-    -- Do not send telemetry data containing a randomized but unique identifier
-    telemetry = {
-      enable = false,
-    },
-    },
-  },
 })
 
-require("lspconfig").pylsp.setup{
-  capabilities = capabilities,
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {'W391', 'E722', 'E231', 'E501', 'E401'},
-          maxLineLength = 100
+require("lspconfig").pylsp.setup {
+    capabilities = capabilities,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = { 'W391', 'E722', 'E231', 'E501', 'E401' },
+                    maxLineLength = 100
+                }
+            }
         }
-      }
     }
-  }
 }
 
 -- require("lspconfig").clangd.setup({
@@ -82,27 +82,27 @@ require("lspconfig").pylsp.setup{
 -- })
 
 require("lspconfig").terraformls.setup({
-  capabilities = capabilities,
-  cmd = { "terraform-ls", "serve" },
-  filetypes = { "terraform", "tf", "terraform-vars" },
-  on_attach = function ()
-      require("treesitter-terraform-doc").setup({})
-      vim.keymap.set("n", "<Leader>od", ":OpenDoc<CR>", {noremap = true, silent = true})
-  end,
+    capabilities = capabilities,
+    cmd = { "terraform-ls", "serve" },
+    filetypes = { "terraform", "tf", "terraform-vars" },
+    on_attach = function()
+        require("treesitter-terraform-doc").setup({})
+        vim.keymap.set("n", "<Leader>od", ":OpenDoc<CR>", { noremap = true, silent = true })
+    end,
 })
 
 require("lspconfig").ansiblels.setup({
-  capabilities = capabilities,
-  root_dir = require('lspconfig.util').root_pattern('.git'),
-  settings = {
-      ansible = {
-          validation = {
-              lint = {
-                  enabled = false,
-              }
-          }
-      }
-  }
+    capabilities = capabilities,
+    root_dir = require('lspconfig.util').root_pattern('.git'),
+    settings = {
+        ansible = {
+            validation = {
+                lint = {
+                    enabled = false,
+                }
+            }
+        }
+    }
 })
 
 require("lspconfig").html.setup({
@@ -126,73 +126,73 @@ require("lspconfig").tailwindcss.setup({
 })
 
 require("lspconfig").gopls.setup({
-  capabilities = capabilities,
-  -- on_attach = function(client, bufnr)
-  --   -- require("shared").on_attach(client, bufnr)
+    capabilities = capabilities,
+    -- on_attach = function(client, bufnr)
+    --   -- require("shared").on_attach(client, bufnr)
 
-  --   vim.api.nvim_create_autocmd("BufWritePre", {
-  --     pattern = {
-  --       "*.go"
-  --     },
-  --     command = [[lua OrgImports(1000)]]
-  --   })
-  -- end,
-  cmd = { "gopls" },
-  filetypes = { "go", "templ" },
-  root_dir = require('lspconfig.util').root_pattern{ "go.mod" },
-  settings = {
-    gopls = {
-      analyses = {
-        nilness = true,
-        unusedparams = true,
-        unusedwrite = true,
-        useany = true,
-      },
-      experimentalPostfixCompletions = true,
-      gofumpt = true,
-      staticcheck = true,
-      usePlaceholders = true,
-      hints = {
-        assignVariableTypes = true,
-        compositeLiteralFields = true,
-        compositeLiteralTypes = true,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      }
+    --   vim.api.nvim_create_autocmd("BufWritePre", {
+    --     pattern = {
+    --       "*.go"
+    --     },
+    --     command = [[lua OrgImports(1000)]]
+    --   })
+    -- end,
+    cmd = { "gopls" },
+    filetypes = { "go", "templ" },
+    root_dir = require('lspconfig.util').root_pattern { "go.mod" },
+    settings = {
+        gopls = {
+            analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+            },
+            experimentalPostfixCompletions = true,
+            gofumpt = true,
+            staticcheck = true,
+            usePlaceholders = true,
+            hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+            }
+        },
     },
-  },
 })
 
 require("lspconfig").templ.setup({
-  capabilities = capabilities,
+    capabilities = capabilities,
 })
 
 require("lspconfig").ts_ls.setup({
-    filetypes = {"templ"},
+    filetypes = { "templ" },
     on_attach = on_attach,
     capabilities = capabilities
 })
 
 require("lspconfig").eslint.setup({
-    filetypes = {"templ"},
+    filetypes = { "templ" },
     on_attach = on_attach,
     capabilities = capabilities
 })
 
-require("lspconfig").powershell_es.setup{
-  capabilities = capabilities,
-  bundle_path = '~/.local/share/powershell/PowerShellEditorServices',
-  shell = '/usr/local/bin/pwsh'
+require("lspconfig").powershell_es.setup {
+    capabilities = capabilities,
+    bundle_path = '~/.local/share/powershell/PowerShellEditorServices',
+    shell = '/usr/local/bin/pwsh'
 }
 
 require("lspconfig").jsonls.setup {
-  capabilities = capabilities,
+    capabilities = capabilities,
     settings = {
         json = {
             schemas = require("schemastore").json.schemas(),
-            validate = {enable = true}
+            validate = { enable = true }
         }
     }
 }
@@ -248,6 +248,8 @@ require("lspconfig.configs").sqlls = {
 require('lspconfig').sqlls.setup({})
 
 require('lspconfig').yamlls.setup({})
+
+require('lspconfig').dockerls.setup({})
 
 -- require('lspconfig.configs').alpinejsls = {
 --     default_config = {
