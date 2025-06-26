@@ -4,30 +4,30 @@
 -- based on
 -- base16-vim (https://github.com/chriskempson/base16-vim)
 -- by Chris Kempson (https://github.com/chriskempson)
--- spirited-chihiro-light scheme by terminalPoltergeist
+-- spirited-haku-dark scheme by terminalPoltergeist
 
-local gui00 = "#e4dbd4"
-local gui01 = "#d5c7bc"
-local gui02 = "#c6b3a4"
-local gui03 = "#b79f8c"
-local gui04 = "#725a47"
-local gui05 = "#5a4738"
-local gui06 = "#423429"
-local gui07 = "#242220"
-local gui08 = "#df496d"
-local gui09 = "#e88c14"
-local gui0A = "#c8512a"
-local gui0B = "#83952f"
-local gui0C = "#39b0a4"
-local gui0D = "#2c99c1"
-local gui0E = "#a33a70"
-local gui0F = "#df496d"
+local gui00 = "#1d2122"
+local gui01 = "#2f3637"
+local gui02 = "#414b4c"
+local gui03 = "#536061"
+local gui04 = "#adb5b9"
+local gui05 = "#c2c8cb"
+local gui06 = "#d7dbdd"
+local gui07 = "#eceeef"
+local gui08 = "#457080"
+local gui09 = "#b09162"
+local gui0A = "#747291"
+local gui0B = "#a6889b"
+local gui0C = "#8f4f48"
+local gui0D = "#73a489"
+local gui0E = "#457080"
+local gui0F = "#457080"
 
 vim.cmd [[
   highlight clear
   syntax reset
 ]]
-vim.g.colors_name = "base16-spirited-chihiro-light"
+vim.g.colors_name = "base16-spirited-haku-dark"
 
 -- Vim editor colors                    fg bg ctermfg ctermbg attr guisp
 vim.api.nvim_set_hl(0, 'Normal', { fg = gui05, bg = gui00 })
