@@ -33,8 +33,6 @@ o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 100 -- fold any region containing more than 100 lines
 o.foldminlines = 4
--- vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3.12'
--- vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
 
 -- api.nvim_create_autocmd('VimEnter',
 --     { pattern = { "*.md", "*.mdx", "*.json*" }, command = ":set concealcursor= | :set conceallevel=2 | :source /Users/jack/.config/nvim/after/syntax/markdown.vim" })
@@ -45,7 +43,7 @@ api.nvim_create_autocmd('VimEnter',
 -- api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set shiftwidth=4"})
 -- api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
 api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = { "*.tf", "*.tf*", "*.go", "*.php", "*.ps*", "*.yml" },
+    pattern = { "*.tf", "*.tf*", "*.go", "*.php", "*.ps*", "*.yml", "*.lua" },
     callback = function()
         vim.lsp.buf.format()
     end,
