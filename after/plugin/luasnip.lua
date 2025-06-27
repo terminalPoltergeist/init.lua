@@ -39,3 +39,14 @@ ls.add_snippets("markdown", {
         f(findFilesWithSameName, {}, {}),
     }),
 })
+
+ls.add_snippets("markdown", {
+    s("frontmatter", {
+        i(0),
+        t({ '---', '' }),
+        t({ 'title: ""', '' }),
+        t({ 'summary: ""', '' }),
+        t({ 'public: false', '' }),
+        t({ '---', '' }),
+    }),
+})
