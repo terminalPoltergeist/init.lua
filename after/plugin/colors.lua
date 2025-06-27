@@ -10,7 +10,7 @@ vim.g.colors_name = colors.scheme
 vim.api.nvim_set_hl(0, '@variable', { fg = colors.gui05 })
 
 -- Vim editor colors                    fg bg ctermfg ctermbg attr guisp
-vim.api.nvim_set_hl(0, 'Normal', { fg = colors.gui05, bg = colors.gui00 })
+vim.api.nvim_set_hl(0, 'Normal', { fg = colors.gui05, bg = 'none' })
 vim.api.nvim_set_hl(0, 'Bold', { bold = true })
 vim.api.nvim_set_hl(0, 'Debug', { fg = colors.gui08 })
 vim.api.nvim_set_hl(0, 'Directory', { fg = colors.gui0D })
@@ -27,7 +27,8 @@ vim.api.nvim_set_hl(0, 'MatchParen', { bg = colors.gui03 })
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = colors.gui0B })
 vim.api.nvim_set_hl(0, 'MoreMsg', { fg = colors.gui0B })
 vim.api.nvim_set_hl(0, 'Question', { fg = colors.gui0D })
-vim.api.nvim_set_hl(0, 'Search', { fg = colors.gui01, bg = colors.gui0A })
+vim.api.nvim_set_hl(0, 'Search', { fg = colors.gui01, bg = colors.gui09 })
+vim.api.nvim_set_hl(0, 'CurSearch', { fg = colors.gui01, bg = colors.gui0A })
 vim.api.nvim_set_hl(0, 'Substitute', { fg = colors.gui01, bg = colors.gui0A })
 vim.api.nvim_set_hl(0, 'SpecialKey', { fg = colors.gui03 })
 vim.api.nvim_set_hl(0, 'TooLong', { fg = colors.gui08 })
@@ -41,7 +42,7 @@ vim.api.nvim_set_hl(0, 'Conceal', { fg = colors.gui0D, bg = colors.gui00 })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.gui00, bg = colors.gui05 })
 vim.api.nvim_set_hl(0, 'NonText', { fg = colors.gui03 })
 vim.api.nvim_set_hl(0, 'LineNr', { fg = colors.gui03, bg = 'none' })
-vim.api.nvim_set_hl(0, 'SignColumn', { fg = colors.gui03, bg = colors.gui00 })
+vim.api.nvim_set_hl(0, 'SignColumn', { fg = colors.gui03, bg = 'none' })
 vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.gui04, bg = colors.gui01 })
 vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = colors.gui02, bg = colors.gui01 })
 vim.api.nvim_set_hl(0, 'VertSplit', { fg = colors.gui02, bg = colors.gui02 })
@@ -137,10 +138,10 @@ vim.api.nvim_set_hl(0, 'gitcommitDiscardedFile', { fg = colors.gui08 })
 vim.api.nvim_set_hl(0, 'gitcommitSelectedFile', { fg = colors.gui0B })
 
 -- GitGutter highlighting
-vim.api.nvim_set_hl(0, 'GitGutterAdd', { fg = colors.gui0B, bg = colors.gui00 })
-vim.api.nvim_set_hl(0, 'GitGutterChange', { fg = colors.gui0D, bg = colors.gui00 })
-vim.api.nvim_set_hl(0, 'GitGutterDelete', { fg = colors.gui08, bg = colors.gui00 })
-vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { fg = colors.gui0E, bg = colors.gui00 })
+vim.api.nvim_set_hl(0, 'GitGutterAdd', { fg = colors.gui0B, bg = 'none' })
+vim.api.nvim_set_hl(0, 'GitGutterChange', { fg = colors.gui0D, bg = 'none' })
+vim.api.nvim_set_hl(0, 'GitGutterDelete', { fg = colors.gui08, bg = 'none' })
+vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { fg = colors.gui0E, bg = 'none' })
 
 -- HTML highlighting
 vim.api.nvim_set_hl(0, 'htmlBold', { fg = colors.gui0A })
@@ -229,9 +230,9 @@ vim.api.nvim_set_hl(0, 'sassMixing', { fg = colors.gui0E })
 vim.api.nvim_set_hl(0, 'sassMixinName', { fg = colors.gui0D })
 
 -- Signify highlighting
-vim.api.nvim_set_hl(0, 'SignifySignAdd', { fg = colors.gui0B, bg = colors.gui01 })
-vim.api.nvim_set_hl(0, 'SignifySignChange', { fg = colors.gui0D, bg = colors.gui01 })
-vim.api.nvim_set_hl(0, 'SignifySignDelete', { fg = colors.gui08, bg = colors.gui01 })
+vim.api.nvim_set_hl(0, 'SignifySignAdd', { fg = colors.gui0B, bg = 'none' })
+vim.api.nvim_set_hl(0, 'SignifySignChange', { fg = colors.gui0D, bg = 'none' })
+vim.api.nvim_set_hl(0, 'SignifySignDelete', { fg = colors.gui08, bg = 'none' })
 
 -- Spelling highlighting
 vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true })
