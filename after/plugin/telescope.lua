@@ -8,35 +8,41 @@ vim.keymap.set('n', '<leader>ps', builtin.live_grep)
 vim.keymap.set('n', '<leader>pb', builtin.buffers)
 
 telescope.setup({
-	defaults = {
+    defaults = {
         hidden = true,
         no_ignore = true,
         file_ignore_patterns = {
-          ".git", "node_modules"
+            ".git", "node_modules"
         },
         results_title = false,
-		layout_strategy = "vertical",
-		layout_config = {
-			vertical = { height = 0.7, preview_height = 0.7 }
-		},
-		border = true,
+        layout_strategy = "vertical",
+        layout_config = {
+            vertical = { height = 0.7, preview_height = 0.7 }
+        },
+        border = true,
         mappings = {
             n = {
                 ["dd"] = actions.delete_buffer,
                 ["q"] = actions.close,
             },
         }
-	},
-	pickers = {
-		find_files = {
-			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-			initial_mode = "normal"
-		},
-		git_files = {
-			initial_mode = "normal"
-		},
-		buffers = {
-			initial_mode = "normal"
-		},
-	},
+    },
+    pickers = {
+        find_files = {
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+            initial_mode = "normal"
+        },
+        git_files = {
+            initial_mode = "normal"
+        },
+        buffers = {
+            initial_mode = "normal"
+        },
+        live_grep = {
+            find_command = { "rg", "--hidden", "--glob", "!**/.git/*" },
+            initial_mode = "insert"
+        }
+    },
 })
+
+require('telescope').load_extension('terraform_doc')

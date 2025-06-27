@@ -46,7 +46,10 @@ return require('packer').startup(function(use)
     use({
         "nvim-telescope/telescope.nvim",
         tag = "0.1.8",
-        requires = { "nvim-lua/plenary.nvim" }
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "ANGkeith/telescope-terraform-doc.nvim"
+        }
     })
 
     use("wakatime/vim-wakatime")
@@ -69,6 +72,9 @@ return require('packer').startup(function(use)
     use("nvim-treesitter/nvim-treesitter-context")
     use("clangd/clangd")
     use("gbprod/phpactor.nvim")
+
+    use("junegunn/fzf")
+    use("junegunn/fzf.vim")
 
     use("ThePrimeagen/vim-be-good")
 

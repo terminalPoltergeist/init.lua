@@ -151,7 +151,7 @@ require("lspconfig").gopls.setup({
             experimentalPostfixCompletions = true,
             gofumpt = true,
             staticcheck = true,
-            usePlaceholders = true,
+            usePlaceholders = false,
             hints = {
                 assignVariableTypes = true,
                 compositeLiteralFields = true,
