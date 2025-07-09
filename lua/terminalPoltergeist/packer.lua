@@ -97,6 +97,7 @@ return require('packer').startup(function(use)
             "nvim-treesitter/nvim-treesitter",
         }
     })
+    use({ "luckasRanarison/tailwind-tools.nvim" })
     use({
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
