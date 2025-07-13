@@ -106,4 +106,6 @@ return require('packer').startup(function(use)
         end,
         ft = { "markdown" }
     })
+
+    use({ "github/copilot.vim" })
 end)
