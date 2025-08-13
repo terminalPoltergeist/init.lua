@@ -7,22 +7,28 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
-local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    -- Mappings to magical LSP functions!
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gk', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
-end
+vim.keymap.set('n', 'K', function()
+    vim.lsp.buf.hover({
+        border = 'rounded'
+    })
+end)
+
+-- local on_attach = function(client, bufnr)
+--     -- Enable completion triggered by <c-x><c-o>
+--     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+--     -- Mappings to magical LSP functions!
+--     local bufopts = { noremap = true, silent = true, buffer = bufnr }
+--     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+--     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+--     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+--     vim.keymap.set('n', 'gk', vim.lsp.buf.hover, bufopts)
+--     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+--     vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, bufopts)
+--     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+--     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+--     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+--     vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
+-- end
 
 -- vim.opt.signcolumn = 'no'
 
@@ -85,9 +91,15 @@ require("lspconfig").terraformls.setup({
     capabilities = capabilities,
     cmd = { "terraform-ls", "serve" },
     filetypes = { "terraform", "tf", "terraform-vars" },
+    init_options = {
+        experimentalFeatures = {
+            prefillRequiredFields = true,
+        },
+    },
     on_attach = function()
         require("treesitter-terraform-doc").setup({})
         vim.keymap.set("n", "<Leader>od", ":OpenDoc<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<Leader>td", ":Telescope terraform_doc<CR>", { noremap = true, silent = true })
     end,
 })
 
@@ -107,7 +119,7 @@ require("lspconfig").ansiblels.setup({
 
 require("lspconfig").html.setup({
     capabilities = capabilities,
-    filetypes = { "html", "templ", "blade" },
+    filetypes = { "html", "blade" },
 })
 
 require("lspconfig").htmx.setup({
@@ -122,7 +134,7 @@ require("lspconfig").cssls.setup({
 require("lspconfig").tailwindcss.setup({
     capabilities = capabilities,
     filetypes = { "html", "templ", "css", "blade" },
-    init_options = { userLanguages = { templ = "html" } }
+    init_options = { userLanguages = { templ = "html" } },
 })
 
 require("lspconfig").gopls.setup({
@@ -184,7 +196,32 @@ require("lspconfig").eslint.setup({
 require("lspconfig").powershell_es.setup {
     capabilities = capabilities,
     bundle_path = '~/.local/share/powershell/PowerShellEditorServices',
-    shell = '/usr/local/bin/pwsh'
+    shell = '/usr/local/bin/pwsh',
+    settings = {
+        powershell = {
+            codeFormatting = {
+                addWhitespaceAroundPipe = true,
+                alignPropertyValuePairs = true,
+                autoCorrectAliases = false,
+                avoidUsingSemicolons = false,
+                ignoreOneLineBlock = true,
+                newLineAfterCloseBrace = false,
+                newLineAfterOpenBrace = true,
+                openBraceOnSameLine = true,
+                pipelineIdentationStyle = 'NoIndentation',
+                trimWhitespaceAroundPipe = false,
+                useConsistentStrings = false,
+                useCorrectcase = true,
+                whitespaceAfterSeparator = true,
+                whitespaceAroundOperator = true,
+                whitespaceAroundPipe = true,
+                whitespaceBeforeOpenBrace = true,
+                whitespaceBeforeOpenParen = true,
+                whitespaceBetweenParameters = false,
+                whitespaceInsideBraces = true,
+            }
+        }
+    }
 }
 
 require("lspconfig").jsonls.setup {

@@ -1,12 +1,15 @@
 local cmp = require('cmp')
 
+require('copilot_cmp').setup()
+
 cmp.setup({
     sources = {
-        { name = 'nvim_lsp', priority = 50 },
-        { name = "buffer",   priority = 40 },
-        { name = "path",     priority = 30 },
-        { name = "luasnip",  priority = 20 },
-        { name = "marksman", priority = 10 },
+        { name = 'nvim_lsp', priority = 60 },
+        { name = 'copilot',  priority = 50 },
+        { name = 'buffer',   priority = 40 },
+        { name = 'path',     priority = 30 },
+        { name = 'luasnip',  priority = 20 },
+        { name = 'marksman', priority = 10 },
     },
     snippet = {
         expand = function(args)
@@ -43,7 +46,11 @@ cmp.setup({
         documentation = {
             max_height = 15,
             max_width = 60,
+            border = 'rounded'
         },
+        completion = {
+            border = 'rounded'
+        }
     }
 })
 

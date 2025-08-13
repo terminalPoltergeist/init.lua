@@ -33,6 +33,7 @@ o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 100 -- fold any region containing more than 100 lines
 o.foldminlines = 4
+-- o.winborder = 'rounded'
 
 -- api.nvim_create_autocmd('VimEnter',
 --     { pattern = { "*.md", "*.mdx", "*.json*" }, command = ":set concealcursor= | :set conceallevel=2 | :source /Users/jack/.config/nvim/after/syntax/markdown.vim" })
@@ -41,12 +42,21 @@ api.nvim_create_autocmd('VimEnter',
     { pattern = { "*.ps*", "*.pde" }, command = ":set tabstop=4 | set shiftwidth=4 | set colorcolumn=115" })
 -- api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set shiftwidth=4"})
 -- api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
+api.nvim_create_augroup("formatting", { clear = true })
 api.nvim_create_autocmd({ "BufWritePre" }, {
-    -- pattern = { "*.tf", "*.tf*", "*.go", "*.php", "*.ps*", "*.yml", "*.lua" },
+    group = "formatting",
     callback = function()
         vim.lsp.buf.format()
     end,
 })
+api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*.html", "*.templ", "*.css", "*.blade.php" },
+    group = "formatting",
+    callback = function()
+        vim.cmd("TailwindSortSync")
+    end,
+})
+
 api.nvim_create_autocmd('VimEnter', { command = ":if argc() == 0 | Explore! | endif | set autoindent" })
 api.nvim_create_autocmd('VimEnter',
     { pattern = { "*.tf" }, command = ":setlocal commentstring=#\\ %s | setlocal ft=terraform" })

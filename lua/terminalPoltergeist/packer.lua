@@ -28,19 +28,16 @@ return require('packer').startup(function(use)
     })
 
     use({
-        "VonHeikemen/lsp-zero.nvim",
-        branch = 'v4.x',
-        requires = {
-            "neovim/nvim-lspconfig",
-            "hrsh7th/nvim-cmp",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-vsnip",
-            "hrsh7th/vim-vsnip"
-        }
+        "neovim/nvim-lspconfig",
+        "hrsh7th/nvim-cmp",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-vsnip",
+        "hrsh7th/vim-vsnip",
+        "zbirenbaum/copilot-cmp",
     })
 
     use({
@@ -107,5 +104,7 @@ return require('packer').startup(function(use)
         ft = { "markdown" }
     })
 
-    use({ "github/copilot.vim" })
+    use({
+        "zbirenbaum/copilot.lua",
+    })
 end)
