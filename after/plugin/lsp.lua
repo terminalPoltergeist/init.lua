@@ -128,7 +128,19 @@ require("lspconfig").htmx.setup({
 })
 
 require("lspconfig").cssls.setup({
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+        css = {
+            validate = true,
+            lint = { unknownAtRules = "ignore" },
+        },
+        scss = {
+            validate = true,
+        },
+        less = {
+            validate = true,
+        },
+    }
 })
 
 require("lspconfig").tailwindcss.setup({
@@ -235,7 +247,9 @@ require("lspconfig").jsonls.setup {
 }
 
 require("lspconfig").marksman.setup({})
-require("lspconfig").phpactor.setup({})
+require("lspconfig").phpactor.setup({
+    capabilities = capabilities
+})
 require('lspconfig').intelephense.setup({
     filetypes = { "php" },
     commands = {
@@ -255,12 +269,12 @@ require('lspconfig').intelephense.setup({
     capabilities = capabilities
 })
 
--- require('lspconfig.configs').pbls = {
---     default_config = {
---         cmd = { '/Users/jack/.cargo/bin/pbls' },
---         filetypes = { 'proto' }
---     }
--- }
+require('lspconfig.configs').pbls = {
+    default_config = {
+        cmd = { '/Users/jack/.cargo/bin/pbls' },
+        filetypes = { 'proto' }
+    }
+}
 
 -- require('lspconfig').pbls.setup({})
 
