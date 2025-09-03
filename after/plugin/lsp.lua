@@ -39,7 +39,7 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
     require('cmp_nvim_lsp').default_capabilities()
 )
 
-require("lspconfig").lua_ls.setup({
+lsp.lua_ls.setup({
     capabilities = capabilities,
     -- on_attach = custom_attach,
     settings = {
@@ -66,6 +66,22 @@ require("lspconfig").lua_ls.setup({
     },
 })
 
+lsp.terraformls.setup({
+    capabilities = capabilities,
+    cmd = { "terraform-ls", "serve" },
+    filetypes = { "terraform", "tf", "terraform-vars" },
+    init_options = {
+        experimentalFeatures = {
+            prefillRequiredFields = true,
+        },
+    },
+    on_attach = function()
+        require("treesitter-terraform-doc").setup({})
+        vim.keymap.set("n", "<Leader>od", ":OpenDoc<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<Leader>td", ":Telescope terraform_doc<CR>", { noremap = true, silent = true })
+    end,
+})
+
 require("lspconfig").pylsp.setup {
     capabilities = capabilities,
     settings = {
@@ -86,22 +102,6 @@ require("lspconfig").pylsp.setup {
 --         client.server_capabilities.signatureHelpProvider = false
 --     end,
 -- })
-
-require("lspconfig").terraformls.setup({
-    capabilities = capabilities,
-    cmd = { "terraform-ls", "serve" },
-    filetypes = { "terraform", "tf", "terraform-vars" },
-    init_options = {
-        experimentalFeatures = {
-            prefillRequiredFields = true,
-        },
-    },
-    on_attach = function()
-        require("treesitter-terraform-doc").setup({})
-        vim.keymap.set("n", "<Leader>od", ":OpenDoc<CR>", { noremap = true, silent = true })
-        vim.keymap.set("n", "<Leader>td", ":Telescope terraform_doc<CR>", { noremap = true, silent = true })
-    end,
-})
 
 require("lspconfig").ansiblels.setup({
     capabilities = capabilities,
