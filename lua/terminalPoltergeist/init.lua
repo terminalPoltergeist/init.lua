@@ -39,7 +39,7 @@ o.foldminlines = 4
 --     { pattern = { "*.md", "*.mdx", "*.json*" }, command = ":set concealcursor= | :set conceallevel=2 | :source /Users/jack/.config/nvim/after/syntax/markdown.vim" })
 -- api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ./"})
 api.nvim_create_autocmd('VimEnter',
-    { pattern = { "*.ps*", "*.pde" }, command = ":set tabstop=4 | set shiftwidth=4 | set colorcolumn=115" })
+    { pattern = { "*.ps*", "*.pde" }, command = ":set colorcolumn=115" })
 -- api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set shiftwidth=4"})
 -- api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
 api.nvim_create_augroup("formatting", { clear = true })
