@@ -4,7 +4,10 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp = require("lspconfig")
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true,
+    float = {
+        border = "rounded",
+    },
 })
 
 vim.keymap.set('n', 'K', function()
