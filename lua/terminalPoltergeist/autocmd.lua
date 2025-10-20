@@ -23,7 +23,7 @@ api.nvim_create_autocmd('VimEnter',
 api.nvim_create_autocmd('LspAttach', {
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "gd", function() require('telescope.builtin').lsp_definitions() end, opts)
         vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
     end,
 })

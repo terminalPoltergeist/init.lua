@@ -1,7 +1,4 @@
 -- TODO: check out configs at https://lsp-zero.netlify.app/docs/getting-started.html#plot-twist
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local lsp = require("lspconfig")
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -9,12 +6,6 @@ vim.diagnostic.config({
         border = "rounded",
     },
 })
-
-vim.keymap.set('n', 'K', function()
-    vim.lsp.buf.hover({
-        border = 'rounded'
-    })
-end)
 
 -- local on_attach = function(client, bufnr)
 --     -- Enable completion triggered by <c-x><c-o>
@@ -33,16 +24,25 @@ end)
 --     vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, bufopts)
 -- end
 
+vim.keymap.set('n', 'K', function()
+    vim.lsp.buf.hover({
+        border = 'rounded'
+    })
+end)
+
 -- vim.opt.signcolumn = 'no'
 
-local lspconfig_defaults = lsp.util.default_config
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-    'force',
-    lspconfig_defaults.capabilities,
-    require('cmp_nvim_lsp').default_capabilities()
-)
+-- vim.lsp.util.default_config.capabilities = vim.tbl_deep_extend(
+--     'force',
+--     vim.lsp.util.default_config.capabilities,
+--     capabilities
+-- )
 
-lsp.lua_ls.setup({
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities = vim.tbl_deep_extend('force', capabilities, cmp_capabilities)
+
+vim.lsp.enable('lua_ls', {
     capabilities = capabilities,
     -- on_attach = custom_attach,
     settings = {
@@ -69,7 +69,7 @@ lsp.lua_ls.setup({
     },
 })
 
-lsp.terraformls.setup({
+vim.lsp.enable('terraformls', {
     capabilities = capabilities,
     cmd = { "terraform-ls", "serve" },
     filetypes = { "terraform", "tf", "terraform-vars" },
@@ -85,19 +85,20 @@ lsp.terraformls.setup({
     end,
 })
 
-require("lspconfig").pylsp.setup {
-    capabilities = capabilities,
-    settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    ignore = { 'W391', 'E722', 'E231', 'E501', 'E401' },
-                    maxLineLength = 100
-                }
-            }
-        }
-    }
-}
+-- WARN: ~/.local/state/nvim/lsp.log shows "cannot start pylsp due to config error: .../Cellar/neovim/0.11.4/share/nvim/runtime/lua/vim/lsp.lua:485: cmd: expected expected function or table with executable command, got table: 0x010a372740. Info: pylsp is not executable"
+-- vim.lsp.enable('pylsp', {
+--     capabilities = capabilities,
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 pycodestyle = {
+--                     ignore = { 'W391', 'E722', 'E231', 'E501', 'E401' },
+--                     maxLineLength = 100
+--                 }
+--             }
+--         }
+--     }
+-- })
 
 -- require("lspconfig").clangd.setup({
 --   capabilities = capabilities,
@@ -106,9 +107,9 @@ require("lspconfig").pylsp.setup {
 --     end,
 -- })
 
-require("lspconfig").ansiblels.setup({
+vim.lsp.enable('ansiblels', {
     capabilities = capabilities,
-    root_dir = require('lspconfig.util').root_pattern('.git'),
+    root_markers = { '.git' },
     settings = {
         ansible = {
             validation = {
@@ -120,17 +121,24 @@ require("lspconfig").ansiblels.setup({
     }
 })
 
-require("lspconfig").html.setup({
+vim.lsp.enable('html', {
     capabilities = capabilities,
     filetypes = { "html", "blade" },
+    settings = {
+        html = {
+            format = {
+                -- wrapLineLength = 0 -- don't auto-split long html lines into multiple lines
+            }
+        }
+    }
 })
 
-require("lspconfig").htmx.setup({
-    capabilities = capabilities,
-    filetypes = { "html", "templ" }
-})
+-- vim.lsp.enable('htmx', {
+--     capabilities = capabilities,
+--     filetypes = { "html", "templ" }
+-- })
 
-require("lspconfig").cssls.setup({
+vim.lsp.enable('cssls', {
     capabilities = capabilities,
     settings = {
         css = {
@@ -146,13 +154,13 @@ require("lspconfig").cssls.setup({
     }
 })
 
-require("lspconfig").tailwindcss.setup({
+vim.lsp.enable('tailwindcss', {
     capabilities = capabilities,
     filetypes = { "html", "templ", "css", "blade" },
     init_options = { userLanguages = { templ = "html" } },
 })
 
-require("lspconfig").gopls.setup({
+vim.lsp.enable('gopls', {
     capabilities = capabilities,
     -- on_attach = function(client, bufnr)
     --   -- require("shared").on_attach(client, bufnr)
@@ -166,7 +174,7 @@ require("lspconfig").gopls.setup({
     -- end,
     cmd = { "gopls" },
     filetypes = { "go", "templ" },
-    root_dir = require('lspconfig.util').root_pattern { "go.mod" },
+    root_markers = { 'go.mod' },
     settings = {
         gopls = {
             analyses = {
@@ -192,23 +200,23 @@ require("lspconfig").gopls.setup({
     },
 })
 
-require("lspconfig").templ.setup({
+vim.lsp.enable('templ', {
     capabilities = capabilities,
 })
 
-require("lspconfig").ts_ls.setup({
+vim.lsp.enable('ts_ls', {
     filetypes = { "templ" },
     on_attach = on_attach,
     capabilities = capabilities
 })
 
-require("lspconfig").eslint.setup({
+vim.lsp.enable('eslint', {
     filetypes = { "templ" },
     on_attach = on_attach,
     capabilities = capabilities
 })
 
-require("lspconfig").powershell_es.setup {
+vim.lsp.enable('powershell_es', {
     capabilities = capabilities,
     bundle_path = '~/.local/share/powershell/PowerShellEditorServices',
     shell = '/usr/local/bin/pwsh',
@@ -237,9 +245,9 @@ require("lspconfig").powershell_es.setup {
             }
         }
     }
-}
+})
 
-require("lspconfig").jsonls.setup {
+vim.lsp.enable('jsonls', {
     capabilities = capabilities,
     settings = {
         json = {
@@ -247,13 +255,13 @@ require("lspconfig").jsonls.setup {
             validate = { enable = true }
         }
     }
-}
-
-require("lspconfig").marksman.setup({})
-require("lspconfig").phpactor.setup({
-    capabilities = capabilities
 })
-require('lspconfig').intelephense.setup({
+
+vim.lsp.enable('marksman', {})
+-- vim.lsp.enable('phpactor', {
+--     capabilities = capabilities,
+-- })
+vim.lsp.enable('intelephense', {
     filetypes = { "php" },
     commands = {
         IntelephenseIndex = {
@@ -262,50 +270,55 @@ require('lspconfig').intelephense.setup({
             end,
         },
     },
-    on_attach = function(client, bufnr)
-        -- client.server_capabilities.documentFormattingProvider = false
-        -- client.server_capabilities.documentRangeFormattingProvider = false
-        -- if client.server_capabilities.inlayHintProvider then
-        --   vim.lsp.buf.inlay_hint(bufnr, true)
-        -- end
-    end,
+    settings = {
+        intelephense = {
+            files = {
+                maxSize = 5000000,
+            },
+            diagnostics = {
+                enable = true,
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
     capabilities = capabilities
 })
 
-require('lspconfig.configs').pbls = {
+vim.lsp.enable('pbls', {
     default_config = {
         cmd = { '/Users/jack/.cargo/bin/pbls' },
         filetypes = { 'proto' }
     }
-}
+})
 
 -- require('lspconfig').pbls.setup({})
 
-require("lspconfig.configs").protobuf_language_server = {
-    default_config = {
-        cmd = { '/Users/jack/go/bin/protobuf-language-server', '-logs', '/Users/jack/.local/state/nvim/.protobuf-language-server.log' },
-        filetypes = { 'proto' },
-        root_dir = require('lspconfig.util').root_pattern('.git'),
-        -- single_file_support = true,
-    }
-}
+-- WARN: ~/.local/state/nvim/lsp.log showing "protobuf_language_server does not have a configuration"
+-- vim.lsp.enable('protobuf_language_server', {
+--     default_config = {
+--         cmd = { '/Users/jack/go/bin/protobuf-language-server', '-logs', '/Users/jack/.local/state/nvim/.protobuf-language-server.log' },
+--         filetypes = { 'proto' },
+--         root_markers = { '.git' },
+--         -- single_file_support = true,
+--     }
+-- })
 
-require('lspconfig').protobuf_language_server.setup({})
-
-require("lspconfig.configs").sqlls = {
+vim.lsp.enable('sqlls', {
     default_config = {
         cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
         filetypes = { 'sql' },
-        root_dir = require('lspconfig.util').root_pattern('.git'),
+        root_markers = { '.git' },
     }
-}
-require('lspconfig').sqlls.setup({})
+})
+vim.lsp.enable('sqlls', {})
 
-require('lspconfig').yamlls.setup({})
+vim.lsp.enable('yamlls', {})
 
-require('lspconfig').dockerls.setup({})
+vim.lsp.enable('dockerls', {})
 
-require('lspconfig').ts_ls.setup({
+vim.lsp.enable('ts_ls', {
     default_config = {
         init_options = { hostInfo = 'neovim' },
         cmd = { 'typescript-language-server', '--stdio' },
@@ -317,9 +330,14 @@ require('lspconfig').ts_ls.setup({
             'typescriptreact',
             'typescript.tsx',
         },
-        root_dir = require('lspconfig.util').root_pattern('tsconfig.json', 'jsconfig.json', 'package.json', '.git'),
+        root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
         single_file_support = true,
     },
+})
+
+vim.lsp.enable('nil_ls', {
+    autostart = true,
+    capabilities = capabilities,
 })
 
 -- require('lspconfig.configs').alpinejsls = {

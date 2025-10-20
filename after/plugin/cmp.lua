@@ -37,15 +37,15 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-j>'] = cmp.mapping.scroll_docs(4),
+        -- ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+        -- ['<C-j>'] = cmp.mapping.scroll_docs(4),
         ['<C-a>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     window = {
         documentation = {
-            max_height = 15,
-            max_width = 60,
+            max_height = 30,
+            max_width = 80,
             border = 'rounded'
         },
         completion = {

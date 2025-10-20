@@ -18,7 +18,12 @@ telescope.setup({
         results_title = false,
         layout_strategy = "vertical",
         layout_config = {
-            vertical = { height = 0.7, preview_height = 0.7 }
+            preview_cutoff = 30,
+            vertical = {
+                height = 0.9,
+                width = 0.9,
+                preview_height = 0.7
+            }
         },
         border = true,
         mappings = {

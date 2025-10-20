@@ -42,7 +42,7 @@ return require('packer').startup(function(use)
 
     use({
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
+        -- branch = "0.1.x",
         requires = {
             "nvim-lua/plenary.nvim",
             "ANGkeith/telescope-terraform-doc.nvim"
@@ -87,13 +87,13 @@ return require('packer').startup(function(use)
     use("bufbuild/vim-buf")
     use("Afourcat/treesitter-terraform-doc.nvim")
     use("laytan/cloak.nvim")
-    use({
-        "olimorris/codecompanion.nvim",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        }
-    })
+    -- use({
+    --     "olimorris/codecompanion.nvim",
+    --     requires = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-treesitter/nvim-treesitter",
+    --     }
+    -- })
     use({ "luckasRanarison/tailwind-tools.nvim" })
     use({
         "iamcco/markdown-preview.nvim",
