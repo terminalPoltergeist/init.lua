@@ -137,7 +137,7 @@ _G.packer_plugins = {
   ["copilot-cmp"] = {
     loaded = true,
     path = "/Users/jack/.local/share/nvim/site/pack/packer/start/copilot-cmp",
-    url = "https://github.com/zbirenbaum/copilot-cmp"
+    url = "https://github.com/hendrikpetertje/copilot-cmp"
   },
   ["copilot.lua"] = {
     loaded = true,
@@ -184,7 +184,7 @@ _G.packer_plugins = {
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/Users/jack/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
-    url = "https://github.com/norcalli/nvim-colorizer.lua"
+    url = "https://github.com/NiklasV1/nvim-colorizer.lua"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

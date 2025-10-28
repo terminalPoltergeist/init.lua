@@ -37,7 +37,11 @@ return require('packer').startup(function(use)
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-vsnip",
         "hrsh7th/vim-vsnip",
-        "zbirenbaum/copilot-cmp",
+        -- "zbirenbaum/copilot-cmp"
+    })
+    use({
+        'hendrikpetertje/copilot-cmp', -- fork of ^ that fixes deprecation errors
+        branch = 'fix-deprecated-errors'
     })
 
     use({
@@ -52,7 +56,8 @@ return require('packer').startup(function(use)
     use("wakatime/vim-wakatime")
     use("b0o/schemastore.nvim")
     use("pearofducks/ansible-vim")
-    use("norcalli/nvim-colorizer.lua")
+    -- use("norcalli/nvim-colorizer.lua")
+    use("NiklasV1/nvim-colorizer.lua") -- fork of ^ that fixes deprecated api usage
     use("f-person/git-blame.nvim")
     -- use("onsails/lspkind.nvim") -- syntax symbols.. need patched font
     use("folke/todo-comments.nvim")
