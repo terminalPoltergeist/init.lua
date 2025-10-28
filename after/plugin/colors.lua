@@ -16,7 +16,7 @@ vim.api.nvim_set_hl(0, 'Debug', { fg = colors.gui08 })
 vim.api.nvim_set_hl(0, 'Directory', { fg = colors.gui0D })
 -- vim.api.nvim_set_hl(0, 'MsgArea', { bg = colors.gui01 })
 vim.api.nvim_set_hl(0, 'Error', { fg = colors.gui00, bg = colors.gui08 })
-vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = colors.gui08, bg = colors.gui00 })
+vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = colors.gui08 })
 vim.api.nvim_set_hl(0, 'Exception', { fg = colors.gui08 })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = colors.gui0C, bg = colors.gui01 })
 vim.api.nvim_set_hl(0, 'Folded', { fg = colors.gui03, bg = colors.gui01 })
@@ -88,6 +88,9 @@ vim.api.nvim_set_hl(0, 'Tag', { fg = colors.gui0A })
 vim.api.nvim_set_hl(0, 'Todo', { fg = colors.gui0A, bg = colors.gui01 })
 vim.api.nvim_set_hl(0, 'Type', { fg = colors.gui0A })
 vim.api.nvim_set_hl(0, 'Typedef', { fg = colors.gui0A })
+
+-- Telescope highlighting
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.gui0A, bg = 'none' })
 
 -- Powershell highlighting
 vim.api.nvim_set_hl(0, 'ps1Keyword', { fg = colors.gui08 })

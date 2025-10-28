@@ -9,7 +9,8 @@ require 'todo-comments'.setup({
         NOTE = { color = colors.gui0E },
         FIX = { color = colors.gui0A, alt = { "WARN" } },
         DEP = { color = colors.gui0A, alt = { "DEPRECATED" } },
-        ERR = { color = colors.gui0F, alt = { "BUG", "XXX" } }
+        ERR = { color = colors.gui0F, alt = { "BUG", "XXX" } },
+        THANKS = { color = colors.gui0D },
     },
     highlight = {
         after = "",

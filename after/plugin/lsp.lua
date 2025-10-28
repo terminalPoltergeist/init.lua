@@ -55,11 +55,11 @@ vim.lsp.enable('lua_ls', {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
+                globals = { "vim", "require" },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                -- library = api.nvim_get_runtime_file("", true),
+                library = vim.api.nvim_get_runtime_file("", true),
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
@@ -69,7 +69,7 @@ vim.lsp.enable('lua_ls', {
     },
 })
 
-vim.lsp.enable('terraformls', {
+vim.lsp.config('terraformls', {
     capabilities = capabilities,
     cmd = { "terraform-ls", "serve" },
     filetypes = { "terraform", "tf", "terraform-vars" },
@@ -79,11 +79,12 @@ vim.lsp.enable('terraformls', {
         },
     },
     on_attach = function()
-        require("treesitter-terraform-doc").setup({})
-        vim.keymap.set("n", "<Leader>od", ":OpenDoc<CR>", { noremap = true, silent = true })
-        vim.keymap.set("n", "<Leader>td", ":Telescope terraform_doc<CR>", { noremap = true, silent = true })
+        require('telescope').load_extension('terraform_doc')
+        vim.keymap.set("n", "<Leader>td", ":Telescope terraform_doc full_name=hashicorp/azurerm<CR>",
+            { noremap = true, silent = true })
     end,
 })
+vim.lsp.enable('terraformls')
 
 -- WARN: ~/.local/state/nvim/lsp.log shows "cannot start pylsp due to config error: .../Cellar/neovim/0.11.4/share/nvim/runtime/lua/vim/lsp.lua:485: cmd: expected expected function or table with executable command, got table: 0x010a372740. Info: pylsp is not executable"
 -- vim.lsp.enable('pylsp', {
@@ -216,9 +217,9 @@ vim.lsp.enable('eslint', {
     capabilities = capabilities
 })
 
-vim.lsp.enable('powershell_es', {
+vim.lsp.config('powershell_es', {
     capabilities = capabilities,
-    bundle_path = '~/.local/share/powershell/PowerShellEditorServices',
+    bundle_path = '/Users/jack/.local/share/powershell/PowerShellEditorServices',
     shell = '/usr/local/bin/pwsh',
     settings = {
         powershell = {
@@ -246,6 +247,8 @@ vim.lsp.enable('powershell_es', {
         }
     }
 })
+
+vim.lsp.enable('powershell_es')
 
 vim.lsp.enable('jsonls', {
     capabilities = capabilities,
@@ -283,7 +286,16 @@ vim.lsp.enable('intelephense', {
             },
         },
     },
-    capabilities = capabilities
+    capabilities = capabilities,
+    on_attach = vim.api.nvim_create_autocmd(
+        "BufWritePre",
+        {
+            pattern = "*.php",
+            callback = function()
+                vim.cmd("let view = winsaveview() | silent! %s/fn(/fn (/g | call winrestview(view)")
+            end,
+        }
+    )
 })
 
 vim.lsp.enable('pbls', {
