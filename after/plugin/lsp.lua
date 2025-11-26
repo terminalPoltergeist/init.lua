@@ -124,7 +124,7 @@ vim.lsp.enable('ansiblels', {
 
 vim.lsp.enable('html', {
     capabilities = capabilities,
-    filetypes = { "html", "blade" },
+    filetypes = { "html", "blade", "markdown" },
     settings = {
         html = {
             format = {

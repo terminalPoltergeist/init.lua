@@ -88,6 +88,12 @@ return require('packer').startup(function(use)
         }
     })
 
+    use({
+        "prettier/vim-prettier",
+        run = 'npm install',
+        ft = { 'javascript', 'blade', 'css', 'html' }
+    })
+
     -- use("dense-analysis/ale") -- this caused duplicate diagnostic messages.. probably a way to disable it
     use("bufbuild/vim-buf")
     use("Afourcat/treesitter-terraform-doc.nvim")

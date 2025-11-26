@@ -47,7 +47,10 @@ telescope.setup({
             ".git", "node_modules"
         },
         buffer_previewer_maker = truncate_large_files,
-        results_title = false,
+        results_title = (function()
+            local cwd = vim.fn.getcwd()
+            return " (" .. cwd .. ")"
+        end)(),
         border = true,
         mappings = {
             n = {
