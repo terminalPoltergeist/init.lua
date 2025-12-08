@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
 
     use("wakatime/vim-wakatime")
     use("b0o/schemastore.nvim")
-    use("pearofducks/ansible-vim")
+    -- use("pearofducks/ansible-vim")
     -- use("norcalli/nvim-colorizer.lua")
     use("NiklasV1/nvim-colorizer.lua") -- fork of ^ that fixes deprecated api usage
     use("f-person/git-blame.nvim")

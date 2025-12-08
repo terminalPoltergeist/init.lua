@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/Users/jack/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["ansible-vim"] = {
-    loaded = true,
-    path = "/Users/jack/.local/share/nvim/site/pack/packer/start/ansible-vim",
-    url = "https://github.com/pearofducks/ansible-vim"
-  },
   ["auto-pairs"] = {
     loaded = true,
     path = "/Users/jack/.local/share/nvim/site/pack/packer/start/auto-pairs",
@@ -329,11 +324,11 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType css ++once lua require("packer.load")({'vim-prettier'}, { ft = "css" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'vim-prettier'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-prettier'}, { ft = "javascript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType blade ++once lua require("packer.load")({'vim-prettier'}, { ft = "blade" }, _G.packer_plugins)]]
-vim.cmd [[au FileType css ++once lua require("packer.load")({'vim-prettier'}, { ft = "css" }, _G.packer_plugins)]]
-vim.cmd [[au FileType html ++once lua require("packer.load")({'vim-prettier'}, { ft = "html" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

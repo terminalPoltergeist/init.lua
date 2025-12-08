@@ -326,7 +326,22 @@ vim.lsp.enable('sqlls', {
 })
 vim.lsp.enable('sqlls', {})
 
-vim.lsp.enable('yamlls', {})
+vim.lsp.enable('yamlls', {
+    settings = {
+        yaml = {
+            schemas = {
+                ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] =
+                '*.docker-compose.yml',
+                ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] =
+                '*.compose.yml',
+                ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] =
+                'docker-compose.yaml',
+                ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] =
+                'compose.yaml',
+            }
+        }
+    }
+})
 
 vim.lsp.enable('dockerls', {})
 
